@@ -40,17 +40,23 @@ class ArticleController(private val articleRepository: ArticleRepository) {
     @PutMapping("/articles/{id}")
     fun updateArticleById(@PathVariable(value = "id") articleId: Long,
                           @Valid @RequestBody newArticle: Article): ResponseEntity<Article> {
+
         return articleRepository.findById(articleId).map { existingArticle ->
-            val updatedArticle: Article = existingArticle.copy(title = newArticle.title, content = newArticle.content)
+            val updatedArticle: Article = existingArticle
+                    .copy(title = newArticle.title, content = newArticle.content)
+
             ResponseEntity.ok().body(articleRepository.save(updatedArticle))
         }.orElse(ResponseEntity.notFound().build())
+
     }
 
     @DeleteMapping("/articles/{id}")
     fun deleteArticleById(@PathVariable(value = "id") articleId: Long): ResponseEntity<Void> {
+
         return articleRepository.findById(articleId).map { article  ->
             articleRepository.delete(article)
             ResponseEntity<Void>(HttpStatus.OK)
         }.orElse(ResponseEntity.notFound().build())
+
     }
 }
