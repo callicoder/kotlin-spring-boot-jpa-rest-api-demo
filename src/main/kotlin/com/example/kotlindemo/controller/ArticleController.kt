@@ -28,13 +28,9 @@ class ArticleController(private val articleRepository: ArticleRepository) {
 
     @GetMapping("/articles/{id}")
     fun getArticleById(@PathVariable(value = "id") articleId: Long): ResponseEntity<Article> {
-        val article: Optional<Article>  = articleRepository.findById(articleId)
-
-        return if(article.isPresent) {
-            ResponseEntity.ok().body(article.get())
-        } else {
-            ResponseEntity.notFound().build()
-        }
+        return articleRepository.findById(articleId).map { article ->
+            ResponseEntity.ok(article)
+        }.orElse(ResponseEntity.notFound().build())
     }
 
     @PutMapping("/articles/{id}")
