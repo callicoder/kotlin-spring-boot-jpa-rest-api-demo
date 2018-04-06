@@ -29,7 +29,7 @@ create database kotlin_demo_app
 
 + change `spring.datasource.username` and `spring.datasource.password` as per your mysql installation
 
-**2. Running the App**
+**4. Running the App**
 
 Type the following command in your terminal to run the app -
 
