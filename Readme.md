@@ -4,7 +4,7 @@ Build a Restful CRUD API using Kotlin, Spring Boot, Mysql, JPA and Hibernate.
 
 ## Requirements
 
-1. Java - 1.8.x
+1. Java - 11
 
 2. Maven - 3.x.x
 
